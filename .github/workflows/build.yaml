@@ -1,0 +1,31 @@
+name: Run build
+
+on:
+  workflow_run:
+    workflows: ["Run tests"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+
+jobs:
+  privileged-npm-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.workflow_run.repository.full_name }}
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Custom npm Script from package.json
+        run: npm run build
