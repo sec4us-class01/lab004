@@ -4,8 +4,8 @@
   "description": "Example Node.js project", 
   "main": "index.js", 
   "scripts": { 
-    "build": "echo 'Building the project...'", 
-    "test": "echo 'Testing the project...' && env"   
+    "build": "echo 'Building the project...' && env", 
+    "test": "echo 'Testing the project...'"   
   }, 
   "dependencies": { 
     "express": "^4.17.1" 
